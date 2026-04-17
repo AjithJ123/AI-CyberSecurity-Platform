@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="About PhishGuard AI — multi-source threat intelligence for everyone."
+    />
+    <title>About — PhishGuard AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+  </head>
+  <body class="pg-shell">
+    <div class="pg-bg" aria-hidden="true"></div>
+
+    <header class="pg-header">
+      <div class="pg-container flex items-center justify-between py-4">
+        <a href="./index.html" class="pg-brand">
+          <svg class="pg-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+          <span><span class="pg-brand-name">PhishGuard</span><span class="pg-brand-accent">AI</span></span>
+        </a>
+        <nav aria-label="Primary" class="pg-nav">
+          <a href="./index.html" class="pg-nav-link">Scanner</a>
+          <a href="./about.html" class="pg-nav-link pg-nav-active">About</a>
+          <a href="./privacy.html" class="pg-nav-link">Privacy</a>
+          <a href="./developers.html" class="pg-nav-link">API</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pg-container pb-24 pt-10 md:pt-16 pg-prose" style="max-width: 48rem;">
+      <h1>About PhishGuard AI</h1>
+      <p>
+        PhishGuard AI is a lightweight threat-intelligence scanner that checks links and emails
+        against multiple industry data sources and returns a clear verdict with human-readable
+        reasoning. Built so non-technical users can actually understand what's happening.
+      </p>
+
+      <h2>Detection pipeline</h2>
+      <ul>
+        <li>Offline URL heuristics — HTTPS, TLD, keywords, punycode, IP-host.</li>
+        <li>WHOIS — domain age, registrar, country, expiration.</li>
+        <li>Link-shortener expansion — follows bit.ly / t.co / tinyurl to the real destination.</li>
+        <li>Google Safe Browsing — known malicious + social-engineering URLs.</li>
+        <li>VirusTotal — 70+ antivirus engines + vendor category tags.</li>
+        <li>PhishTank — verified community phishing reports.</li>
+        <li>AI content review — LLM analysis of email text for social-engineering cues.</li>
+        <li>Email-address heuristics — typosquat detection against 30+ brands, disposable provider list, suspicious TLDs.</li>
+      </ul>
+
+      <h2>Limits</h2>
+      <p>
+        No tool catches everything. A "SECURE" verdict is not a guarantee. If a message asks
+        for credentials, payment, or urgent action, verify through a channel you already trust.
+      </p>
+    </main>
+  </body>
+</html>
