@@ -1,20 +1,23 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index" }
-  ],
-  "functions": {
-    "api/index.py": {
-      "includeFiles": "backend/**",
-      "maxDuration": 30
-    }
-  },
-  "headers": [
+  "version": 2,
+  "builds": [
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "assets/**", "use": "@vercel/static" },
     {
-      "source": "/assets/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" }
-      ]
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": "backend/**",
+        "maxDuration": 30
+      }
     }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.py" },
+    { "src": "/assets/(.*)", "dest": "/assets/$1", "headers": { "Cache-Control": "public, max-age=600, must-revalidate" } },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/(.*)\\.html", "dest": "/$1.html" },
+    { "src": "/(.+)", "dest": "/$1" }
   ]
 }
