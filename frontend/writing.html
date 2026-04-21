@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Writing Assistant — paste any text and get a cleaner, more human rewrite. Strips AI tells, tightens wordy sentences, matches your tone."
+    />
+    <title>Writing Assistant — Helix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+  </head>
+  <body class="pg-shell">
+    <div class="pg-bg" aria-hidden="true"></div>
+
+    <header class="pg-header">
+      <div class="pg-container flex items-center justify-between py-4">
+        <a href="./index.html" class="pg-brand">
+          <svg class="pg-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 3c5 5-5 13 0 18" />
+            <path d="M19 3c-5 5 5 13 0 18" />
+            <path d="M7 6h10" />
+            <path d="M9 12h6" />
+            <path d="M7 18h10" />
+          </svg>
+          <span><span class="pg-brand-name">Helix</span><span class="pg-brand-accent">AI</span></span>
+        </a>
+        <nav aria-label="Primary" class="pg-nav">
+          <a href="./index.html" class="pg-nav-link">Home</a>
+          <a href="./scanner.html" class="pg-nav-link">Scanner</a>
+          <a href="./writing.html" class="pg-nav-link pg-nav-active">Writer</a>
+          <a href="./code.html" class="pg-nav-link">Code</a>
+          <a href="./image.html" class="pg-nav-link">Image</a>
+          <a href="./data.html" class="pg-nav-link">Data</a>
+          <a href="./translate.html" class="pg-nav-link">Translate</a>
+          <a href="./about.html" class="pg-nav-link">About</a>
+          <a href="./privacy.html" class="pg-nav-link">Privacy</a>
+          <a href="./developers.html" class="pg-nav-link">API</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pg-container pb-24 pt-10 md:pt-16">
+      <section aria-labelledby="writer-heading" class="pg-hero" style="margin-bottom: 2.25rem;">
+        <div class="pg-status-pill">
+          <span class="pg-status-dot" aria-hidden="true"></span>
+          <span>Writing Assistant · Live</span>
+        </div>
+        <h1 id="writer-heading" class="pg-hero-title" style="font-size: 2.5rem;">
+          Make any text sound <span class="pg-gradient">human</span>.
+        </h1>
+        <p class="pg-hero-sub">
+          Paste any draft and pick a tone. The assistant strips AI tells, tightens wordy
+          paragraphs, and rewrites for clarity — without changing what you meant.
+        </p>
+      </section>
+
+      <section class="pg-scanner" aria-label="Writing input">
+        <form id="writer-form" class="pg-card pg-form">
+          <div>
+            <span class="pg-label" style="margin-bottom: 0.55rem; display: flex;">
+              <span>Tone</span>
+              <span class="pg-label-hint">How should the rewrite sound?</span>
+            </span>
+            <div class="pg-tone-row" role="radiogroup" aria-label="Rewrite tone">
+              <button type="button" role="radio" aria-checked="true" data-tone="natural" class="pg-tone-chip is-active">Natural</button>
+              <button type="button" role="radio" aria-checked="false" data-tone="professional" class="pg-tone-chip">Professional</button>
+              <button type="button" role="radio" aria-checked="false" data-tone="concise" class="pg-tone-chip">Concise</button>
+              <button type="button" role="radio" aria-checked="false" data-tone="friendly" class="pg-tone-chip">Friendly</button>
+            </div>
+          </div>
+
+          <label for="writer-input" class="pg-label">
+            <span>Your text</span>
+            <span class="pg-label-hint" id="writer-counter">0 / 8000</span>
+          </label>
+          <textarea
+            id="writer-input"
+            name="text"
+            required
+            rows="10"
+            maxlength="8000"
+            placeholder="Paste a paragraph, an email draft, a product description — anything you want polished."
+            class="pg-input pg-textarea"
+          ></textarea>
+
+          <p id="writer-error" class="pg-error" role="alert" hidden></p>
+
+          <button id="writer-submit" type="submit" class="pg-submit">
+            <span>Rewrite</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </button>
+        </form>
+
+        <section id="writer-result" aria-live="polite" class="mt-8"></section>
+      </section>
+    </main>
+
+    <footer class="pg-footer">
+      <div class="pg-container py-6 text-sm">
+        <p class="text-slate-500">
+          Helix Writing Assistant. We don't store your text — it's sent to the AI model for
+          processing and discarded after the response is returned.
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="assets/js/writing.js?v=1"></script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Image Analyzer — drop an image and get a description, extracted text (OCR), and an AI-generated likelihood score."
+    />
+    <title>Image Analyzer — Helix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+  </head>
+  <body class="pg-shell">
+    <div class="pg-bg" aria-hidden="true"></div>
+
+    <header class="pg-header">
+      <div class="pg-container flex items-center justify-between py-4">
+        <a href="./index.html" class="pg-brand">
+          <svg class="pg-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 3c5 5-5 13 0 18" />
+            <path d="M19 3c-5 5 5 13 0 18" />
+            <path d="M7 6h10" />
+            <path d="M9 12h6" />
+            <path d="M7 18h10" />
+          </svg>
+          <span><span class="pg-brand-name">Helix</span><span class="pg-brand-accent">AI</span></span>
+        </a>
+        <nav aria-label="Primary" class="pg-nav">
+          <a href="./index.html" class="pg-nav-link">Home</a>
+          <a href="./scanner.html" class="pg-nav-link">Scanner</a>
+          <a href="./writing.html" class="pg-nav-link">Writer</a>
+          <a href="./code.html" class="pg-nav-link">Code</a>
+          <a href="./image.html" class="pg-nav-link pg-nav-active">Image</a>
+          <a href="./data.html" class="pg-nav-link">Data</a>
+          <a href="./translate.html" class="pg-nav-link">Translate</a>
+          <a href="./about.html" class="pg-nav-link">About</a>
+          <a href="./privacy.html" class="pg-nav-link">Privacy</a>
+          <a href="./developers.html" class="pg-nav-link">API</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pg-container pb-24 pt-10 md:pt-16">
+      <section aria-labelledby="image-heading" class="pg-hero" style="margin-bottom: 2.25rem;">
+        <div class="pg-status-pill">
+          <span class="pg-status-dot" aria-hidden="true"></span>
+          <span>Image Analyzer · Live</span>
+        </div>
+        <h1 id="image-heading" class="pg-hero-title" style="font-size: 2.5rem;">
+          See what's in any <span class="pg-gradient">image</span>.
+        </h1>
+        <p class="pg-hero-sub">
+          Drop a picture and get a description, extracted text, and a quick check for
+          AI-generated giveaways. PNG, JPG, WebP, up to 8&nbsp;MB.
+        </p>
+      </section>
+
+      <section class="pg-scanner" aria-label="Image input" style="max-width: 56rem;">
+        <form id="image-form" class="pg-card pg-form">
+          <label for="image-file" class="pg-label">
+            <span>Your image</span>
+            <span class="pg-label-hint">Drag-and-drop or click to choose</span>
+          </label>
+
+          <div id="image-drop" class="pg-drop-zone" role="button" tabindex="0"
+               aria-label="Drop an image file here, or press Enter to open the file picker">
+            <input id="image-file" name="file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+            <div id="image-drop-empty" class="pg-drop-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="9" cy="9" r="2"/>
+                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+              </svg>
+              <p class="pg-drop-title">Drop an image here</p>
+              <p class="pg-drop-hint">PNG · JPG · WebP · GIF · up to 8&nbsp;MB</p>
+            </div>
+            <div id="image-drop-preview" class="pg-drop-preview" hidden>
+              <img id="image-preview-img" alt="Preview of the uploaded image" />
+              <div class="pg-drop-meta">
+                <span id="image-preview-name" class="pg-drop-filename"></span>
+                <span id="image-preview-size" class="pg-drop-size"></span>
+                <button id="image-clear-btn" type="button" class="pg-copy-btn">Replace</button>
+              </div>
+            </div>
+          </div>
+
+          <p id="image-error" class="pg-error" role="alert" hidden></p>
+
+          <button id="image-submit" type="submit" class="pg-submit" disabled>
+            <span>Analyze image</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </button>
+        </form>
+
+        <section id="image-result" aria-live="polite" class="mt-8"></section>
+      </section>
+    </main>
+
+    <footer class="pg-footer">
+      <div class="pg-container py-6 text-sm">
+        <p class="text-slate-500">
+          Helix Image Analyzer. Images are sent to the vision model for analysis and never
+          stored on our side — the response is generated and the image discarded.
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="assets/js/image.js?v=1"></script>
+  </body>
+</html>

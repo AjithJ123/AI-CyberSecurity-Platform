@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="PhishGuard AI — threat analysis for links and emails. Scans against Google Safe Browsing, VirusTotal, PhishTank, WHOIS and AI heuristics."
+      content="Helix — a growing suite of AI tools for everyday safety, productivity, and analysis. Start with the threat scanner and watch the toolkit grow."
     />
-    <title>PhishGuard AI — Threat Intelligence Scanner</title>
+    <title>Helix — A growing suite of AI tools</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,31 +19,28 @@
   </head>
   <body class="pg-shell">
     <div class="pg-bg" aria-hidden="true"></div>
+    <div class="pg-scroll-progress" aria-hidden="true"><span id="pg-scroll-bar"></span></div>
 
     <header class="pg-header">
       <div class="pg-container flex items-center justify-between py-4">
         <a href="./index.html" class="pg-brand">
-          <svg
-            class="pg-brand-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            <path d="M9 12l2 2 4-4" />
+          <svg class="pg-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 3c5 5-5 13 0 18" />
+            <path d="M19 3c-5 5 5 13 0 18" />
+            <path d="M7 6h10" />
+            <path d="M9 12h6" />
+            <path d="M7 18h10" />
           </svg>
-          <span>
-            <span class="pg-brand-name">PhishGuard</span>
-            <span class="pg-brand-accent">AI</span>
-          </span>
+          <span><span class="pg-brand-name">Helix</span><span class="pg-brand-accent">AI</span></span>
         </a>
-
         <nav aria-label="Primary" class="pg-nav">
-          <a href="./index.html" class="pg-nav-link pg-nav-active">Scanner</a>
+          <a href="./index.html" class="pg-nav-link pg-nav-active">Home</a>
+          <a href="./scanner.html" class="pg-nav-link">Scanner</a>
+          <a href="./writing.html" class="pg-nav-link">Writer</a>
+          <a href="./code.html" class="pg-nav-link">Code</a>
+          <a href="./image.html" class="pg-nav-link">Image</a>
+          <a href="./data.html" class="pg-nav-link">Data</a>
+          <a href="./translate.html" class="pg-nav-link">Translate</a>
           <a href="./about.html" class="pg-nav-link">About</a>
           <a href="./privacy.html" class="pg-nav-link">Privacy</a>
           <a href="./developers.html" class="pg-nav-link">API</a>
@@ -51,217 +48,289 @@
       </div>
     </header>
 
-    <main class="pg-container pb-24 pt-10 md:pt-16">
-      <section aria-labelledby="scanner-heading" class="pg-hero">
-        <div class="pg-status-pill">
+    <!-- ===================== ANIMATED BANNER ===================== -->
+    <section class="pg-banner" aria-labelledby="banner-heading">
+      <div class="pg-banner-fx" aria-hidden="true">
+        <span class="pg-blob pg-blob-a"></span>
+        <span class="pg-blob pg-blob-b"></span>
+        <span class="pg-blob pg-blob-c"></span>
+        <div class="pg-grid-lines"></div>
+        <div class="pg-particles">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <!-- Three.js 3D scene as the banner backdrop, behind the hero copy. -->
+      <div class="pg-three-stage" aria-hidden="true">
+        <canvas data-three-hero></canvas>
+      </div>
+
+      <div class="pg-container pg-banner-inner">
+        <div class="pg-status-pill" data-reveal>
           <span class="pg-status-dot" aria-hidden="true"></span>
-          <span>Threat intelligence engine online</span>
+          <span data-scramble>Now in beta · 1 tool live, more shipping monthly</span>
         </div>
 
-        <h1 id="scanner-heading" class="pg-hero-title">
-          Analyze any link or email for <span class="pg-gradient">phishing threats</span>.
+        <h1 id="banner-heading" class="pg-banner-title pg-words" data-reveal>
+          <span class="pg-word">One</span>
+          <span class="pg-word"><span class="pg-gradient pg-helix-word">helix</span></span>
+          <span class="pg-word">of</span>
+          <span class="pg-word">AI</span>
+          <span class="pg-word">tools.</span>
+          <br />
+          <span class="pg-word">Built</span>
+          <span class="pg-word">for</span>
+          <span class="pg-word">clarity,</span>
+          <span class="pg-word">designed</span>
+          <span class="pg-word">for</span>
+          <span class="pg-word">speed.</span>
         </h1>
-        <p class="pg-hero-sub">
-          Multi-source scanning across Google Safe Browsing, VirusTotal, PhishTank, WHOIS and
-          LLM-based content analysis. Every verdict is explained.
+        <p class="pg-banner-sub" data-reveal>
+          Helix is a curated suite of AI-powered utilities, each one focused on doing a single
+          job well. Today: catching phishing threats. Tomorrow: writing, code review, image
+          analysis, and more.
         </p>
 
-        <div class="pg-stats">
-          <div class="pg-stat">
-            <span class="pg-stat-value">6</span>
-            <span class="pg-stat-label">detection sources</span>
-          </div>
-          <div class="pg-stat">
-            <span class="pg-stat-value">70+</span>
-            <span class="pg-stat-label">AV engines</span>
-          </div>
-          <div class="pg-stat">
-            <span class="pg-stat-value">0</span>
-            <span class="pg-stat-label">data stored</span>
-          </div>
-        </div>
-      </section>
-
-      <section aria-label="Scan input" class="pg-scanner">
-        <div class="pg-tablist" role="tablist" aria-label="Check type">
-          <button
-            type="button"
-            id="tab-url"
-            role="tab"
-            aria-selected="true"
-            aria-controls="panel-url"
-            class="pg-tab"
-          >
+        <div class="pg-banner-cta" data-reveal>
+          <a href="./scanner.html" class="pg-cta primary">
+            <span>Try the Scanner</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
             </svg>
-            <span>URL</span>
-          </button>
-          <button
-            type="button"
-            id="tab-email-address"
-            role="tab"
-            aria-selected="false"
-            aria-controls="panel-email-address"
-            class="pg-tab"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="4" />
-              <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94" />
-            </svg>
-            <span>Email address</span>
-          </button>
-          <button
-            type="button"
-            id="tab-email"
-            role="tab"
-            aria-selected="false"
-            aria-controls="panel-email"
-            class="pg-tab"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="3" y="5" width="18" height="14" rx="2" />
-              <path d="m3 7 9 6 9-6" />
-            </svg>
-            <span>Email body</span>
-          </button>
+          </a>
+          <a href="#services" class="pg-cta ghost">
+            <span>Explore tools</span>
+          </a>
         </div>
 
-        <section id="panel-url" role="tabpanel" aria-labelledby="tab-url">
-          <form id="url-form" class="pg-card pg-form">
-            <label for="url-input" class="pg-label">
-              <span>Target URL</span>
-              <span class="pg-label-hint">Paste any http(s) link — shorteners are auto-expanded</span>
-            </label>
-            <div class="pg-input-row">
-              <span class="pg-input-prefix" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="11" width="18" height="10" rx="2" />
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        <div class="pg-banner-marquee" aria-hidden="true">
+          <div class="pg-marquee-track">
+            <span>GOOGLE SAFE BROWSING</span>
+            <span>VIRUSTOTAL</span>
+            <span>PHISHTANK</span>
+            <span>WHOIS</span>
+            <span>GROQ LLAMA 3.1</span>
+            <span>REAL-TIME ANALYSIS</span>
+            <span>GOOGLE SAFE BROWSING</span>
+            <span>VIRUSTOTAL</span>
+            <span>PHISHTANK</span>
+            <span>WHOIS</span>
+            <span>GROQ LLAMA 3.1</span>
+            <span>REAL-TIME ANALYSIS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section id="about" class="pg-section" aria-labelledby="about-heading">
+      <div class="pg-container">
+        <div class="pg-section-eyebrow" data-reveal>About Helix</div>
+        <h2 id="about-heading" class="pg-section-title" data-reveal>
+          Honest AI tools for people who want answers, not jargon.
+        </h2>
+        <p class="pg-section-lead" data-reveal>
+          We build small, focused AI utilities that explain themselves. No black boxes — every
+          verdict, score, or suggestion comes with the reasoning behind it. Built for the
+          worried recipient, not the security analyst.
+        </p>
+
+        <div class="pg-pillars">
+          <article class="pg-pillar" data-reveal>
+            <div class="pg-pillar-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h3>Privacy by default</h3>
+            <p>We don't store your URLs, emails, or anything you submit. Hashed IPs only, 24h TTL, never linked to you.</p>
+          </article>
+
+          <article class="pg-pillar" data-reveal>
+            <div class="pg-pillar-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </div>
+            <h3>Explained, not declared</h3>
+            <p>Every result shows which signals fired, what each source said, and why we landed on a verdict.</p>
+          </article>
+
+          <article class="pg-pillar" data-reveal>
+            <div class="pg-pillar-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z" />
+              </svg>
+            </div>
+            <h3>Fast, free, useful</h3>
+            <p>Sub-2-second p50 response time. No login. No paywall. Just paste and check.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== OUR SERVICES ===================== -->
+    <section id="services" class="pg-section" aria-labelledby="services-heading">
+      <div class="pg-container">
+        <div class="pg-section-eyebrow" data-reveal>Our services</div>
+        <h2 id="services-heading" class="pg-section-title" data-reveal>A toolkit that grows every month.</h2>
+        <p class="pg-section-lead" data-reveal>
+          One tool live now, more in active development. Each will land here when it's ready —
+          no half-baked betas.
+        </p>
+
+        <div class="pg-services">
+          <a href="./scanner.html" class="pg-service live" data-reveal data-tilt>
+            <div class="pg-service-head">
+              <span class="pg-service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m20 20-3.5-3.5" />
                 </svg>
               </span>
-              <input
-                id="url-input"
-                name="url"
-                type="url"
-                required
-                maxlength="2048"
-                placeholder="https://example.com/suspicious-path"
-                autocomplete="off"
-                spellcheck="false"
-                class="pg-input pg-input-mono"
-              />
+              <span class="pg-service-status live">Live</span>
             </div>
-            <p id="url-error" class="pg-error" role="alert" hidden></p>
-            <button id="url-submit" type="submit" class="pg-submit">
-              <span>Run scan</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h14" />
-                <path d="m13 6 6 6-6 6" />
+            <h3>Threat Scanner</h3>
+            <p>Check URLs, sender addresses and email content against Google Safe Browsing, VirusTotal, PhishTank, WHOIS and an AI analyst.</p>
+            <div class="pg-service-cta">Open scanner →</div>
+          </a>
+
+          <a href="./writing.html" class="pg-service live" data-reveal data-tilt>
+            <div class="pg-service-head">
+              <span class="pg-service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9" />
+                  <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4Z" />
+                </svg>
+              </span>
+              <span class="pg-service-status live">Live</span>
+            </div>
+            <h3>Writing Assistant</h3>
+            <p>Plain-English rewriter that strips AI tells, tightens wordy paragraphs, and matches your tone.</p>
+            <div class="pg-service-cta">Open writer →</div>
+          </a>
+
+          <a href="./code.html" class="pg-service live" data-reveal data-tilt>
+            <div class="pg-service-head">
+              <span class="pg-service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m18 16 4-4-4-4" />
+                  <path d="m6 8-4 4 4 4" />
+                  <path d="m14.5 4-5 16" />
+                </svg>
+              </span>
+              <span class="pg-service-status live">Live</span>
+            </div>
+            <h3>Code Reviewer</h3>
+            <p>Paste a snippet, get a focused review: bugs, security, readability, and a one-line summary.</p>
+            <div class="pg-service-cta">Open reviewer →</div>
+          </a>
+
+          <a href="./image.html" class="pg-service live" data-reveal data-tilt>
+            <div class="pg-service-head">
+              <span class="pg-service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <circle cx="9" cy="9" r="2" />
+                  <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                </svg>
+              </span>
+              <span class="pg-service-status live">Live</span>
+            </div>
+            <h3>Image Analyzer</h3>
+            <p>Drop an image — get a description, OCR text, plus a quick check for AI-generated giveaways.</p>
+            <div class="pg-service-cta">Open analyzer →</div>
+          </a>
+
+          <a href="./data.html" class="pg-service live" data-reveal data-tilt>
+            <div class="pg-service-head">
+              <span class="pg-service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 3v18h18" />
+                  <path d="m19 9-5 5-4-4-3 3" />
+                </svg>
+              </span>
+              <span class="pg-service-status live">Live</span>
+            </div>
+            <h3>Data Summarizer</h3>
+            <p>Paste a CSV or table, get the highlights, outliers, and a one-sentence story of what changed.</p>
+            <div class="pg-service-cta">Open summarizer →</div>
+          </a>
+
+          <a href="./translate.html" class="pg-service live" data-reveal data-tilt>
+            <div class="pg-service-head">
+              <span class="pg-service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+              </span>
+              <span class="pg-service-status live">Live</span>
+            </div>
+            <h3>Translator+</h3>
+            <p>Context-aware translation that keeps tone, idioms, and intent — not literal word-swaps.</p>
+            <div class="pg-service-cta">Open translator →</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="pg-site-footer">
+      <div class="pg-container">
+        <div class="pg-footer-grid">
+          <div class="pg-footer-brand">
+            <a href="./index.html" class="pg-brand">
+              <svg class="pg-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 3c5 5-5 13 0 18" />
+                <path d="M19 3c-5 5 5 13 0 18" />
+                <path d="M7 6h10" />
+                <path d="M9 12h6" />
+                <path d="M7 18h10" />
               </svg>
-            </button>
-          </form>
-        </section>
+              <span><span class="pg-brand-name">Helix</span><span class="pg-brand-accent">AI</span></span>
+            </a>
+            <p class="pg-footer-tag">A growing suite of AI tools, built honest.</p>
+          </div>
 
-        <section
-          id="panel-email-address"
-          role="tabpanel"
-          aria-labelledby="tab-email-address"
-          hidden
-        >
-          <form id="email-address-form" class="pg-card pg-form">
-            <label for="email-address-input" class="pg-label">
-              <span>Sender email address</span>
-              <span class="pg-label-hint">We check format, domain age, reputation and typosquats</span>
-            </label>
-            <div class="pg-input-row">
-              <span class="pg-input-prefix" aria-hidden="true">@</span>
-              <input
-                id="email-address-input"
-                name="email"
-                type="email"
-                required
-                maxlength="320"
-                placeholder="security@paypa1-verify.tk"
-                autocomplete="off"
-                spellcheck="false"
-                class="pg-input pg-input-mono"
-              />
-            </div>
-            <p id="email-address-error" class="pg-error" role="alert" hidden></p>
-            <button id="email-address-submit" type="submit" class="pg-submit">
-              <span>Analyze address</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h14" />
-                <path d="m13 6 6 6-6 6" />
-              </svg>
-            </button>
-          </form>
-        </section>
+          <div class="pg-footer-col">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="./scanner.html">Scanner</a></li>
+              <li><a href="#services">All tools</a></li>
+              <li><a href="./developers.html">API</a></li>
+            </ul>
+          </div>
 
-        <section id="panel-email" role="tabpanel" aria-labelledby="tab-email" hidden>
-          <form id="email-form" class="pg-card pg-form">
-            <div class="pg-alert" role="note">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 9v4" />
-                <path d="M12 17h.01" />
-                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
-              </svg>
-              <p>
-                Redact passwords, OTPs and personal data before pasting. We don't store any of
-                this — but you should still practice safe handling.
-              </p>
-            </div>
+          <div class="pg-footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="./about.html">About</a></li>
+              <li><a href="./privacy.html">Privacy</a></li>
+              <li><a href="mailto:hello@helix.example">Contact</a></li>
+            </ul>
+          </div>
 
-            <label for="email-subject" class="pg-label"><span>Subject</span></label>
-            <div class="pg-input-row">
-              <input id="email-subject" name="subject" type="text" maxlength="500" class="pg-input" />
-            </div>
+          <div class="pg-footer-col">
+            <h4>Status</h4>
+            <ul>
+              <li><span class="pg-status-dot inline-status"></span> All systems operational</li>
+              <li class="pg-footer-mini">v1.0 · 2026</li>
+            </ul>
+          </div>
+        </div>
 
-            <label for="email-sender" class="pg-label">
-              <span>From</span>
-              <span class="pg-label-hint">Optional</span>
-            </label>
-            <div class="pg-input-row">
-              <input id="email-sender" name="sender" type="text" maxlength="500" class="pg-input pg-input-mono" />
-            </div>
-
-            <label for="email-body" class="pg-label"><span>Body</span></label>
-            <textarea
-              id="email-body"
-              name="body"
-              required
-              rows="8"
-              maxlength="10000"
-              class="pg-input pg-textarea"
-            ></textarea>
-            <p id="email-error" class="pg-error" role="alert" hidden></p>
-            <button id="email-submit" type="submit" class="pg-submit">
-              <span>Analyze email</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h14" />
-                <path d="m13 6 6 6-6 6" />
-              </svg>
-            </button>
-          </form>
-        </section>
-      </section>
-
-      <section id="result-area" aria-live="polite" class="mt-10"></section>
-
-      <section id="history-area" hidden class="mt-12"></section>
-    </main>
-
-    <footer class="pg-footer">
-      <div class="pg-container py-6 text-sm">
-        <p class="text-slate-500">
-          PhishGuard AI is an educational tool. Signal-based detection can miss zero-day attacks —
-          when in doubt, don't click, and verify with the supposed sender through a trusted channel.
-        </p>
+        <div class="pg-footer-base">
+          <span>© 2026 Helix. All rights reserved.</span>
+          <span class="pg-footer-mini">Educational tool · Not a substitute for IT review</span>
+        </div>
       </div>
     </footer>
 
-    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/home-fx.js?v=2"></script>
+    <script type="module" src="assets/js/three-hero.js?v=blob1"></script>
   </body>
 </html>

@@ -19,7 +19,7 @@ from app.models.schemas import CheckSignal
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 GROQ_MODEL = "llama-3.1-8b-instant"
 
-SYSTEM_PROMPT = """You are PhishGuard's phishing-email analyst.
+SYSTEM_PROMPT = """You are Helix's phishing-email analyst.
 
 You read email content submitted by worried users and decide how likely it is to be
 a phishing attempt. Focus on the *why*, so a non-technical person can learn.

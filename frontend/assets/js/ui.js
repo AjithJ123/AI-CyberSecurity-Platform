@@ -188,7 +188,7 @@ function renderMeta(signals, totalMs) {
   const wrap = el("footer", "pg-meta");
   wrap.appendChild(el("span", "", `ts: ${new Date().toISOString()}`));
   if (totalMs) wrap.appendChild(el("span", "", `dur: ${totalMs}ms`));
-  wrap.appendChild(el("span", "", `engine: phishguard v1.0`));
+  wrap.appendChild(el("span", "", `engine: helix v1.0`));
   return wrap;
 }
 

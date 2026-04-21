@@ -28,7 +28,7 @@ async def check(url: str, client: httpx.AsyncClient) -> CheckSignal:
         return CheckSignal(source="safe_browsing", available=False)
 
     payload = {
-        "client": {"clientId": "phishguard-ai", "clientVersion": "1.0.0"},
+        "client": {"clientId": "helix", "clientVersion": "1.0.0"},
         "threatInfo": {
             "threatTypes": THREAT_TYPES,
             "platformTypes": ["ANY_PLATFORM"],
