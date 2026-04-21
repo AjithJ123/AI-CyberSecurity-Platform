@@ -57,7 +57,9 @@
       "Bash(curl -s -X POST http://127.0.0.1:8000/api/v1/image/analyze -H \"Content-Type: application/json\" --data-binary @C:/temp/img_payload.json)",
       "Bash(python -c ' *)",
       "Bash(curl -s -X POST http://127.0.0.1:8000/api/v1/data/summarize -H \"Content-Type: application/json\" --data-binary @C:/temp/ds_payload.json)",
-      "Bash(curl -s -X POST http://127.0.0.1:8000/api/v1/translate -H \"Content-Type: application/json\" --data-binary @C:/temp/tr_payload.json)"
+      "Bash(curl -s -X POST http://127.0.0.1:8000/api/v1/translate -H \"Content-Type: application/json\" --data-binary @C:/temp/tr_payload.json)",
+      "Bash(gh auth *)",
+      "Bash(curl -s -X POST http://127.0.0.1:8000/api/v1/data/summarize -H \"Content-Type: application/json\" --data-binary @C:/temp/ds_big.json)"
     ]
   }
 }

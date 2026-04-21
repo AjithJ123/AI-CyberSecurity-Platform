@@ -185,7 +185,12 @@ def _strip_code_fence(text: str) -> str:
     return stripped.strip()
 
 
-async def summarize(text: str, context: str) -> dict[str, Any]:
+async def summarize(
+    text: str,
+    context: str,
+    total_rows_hint: int | None = None,
+    file_size_bytes: int | None = None,
+) -> dict[str, Any]:
     api_key = settings.groq_api_key
     if not api_key:
         raise AIAnalysisError("GROQ_API_KEY is not configured")
@@ -213,11 +218,24 @@ async def summarize(text: str, context: str) -> dict[str, Any]:
 
     user_msg_parts = [
         f"Delimiter: {'TAB' if delim == chr(9) else delim}",
-        f"Row count (after truncation): {len(body)}",
         f"Column count: {width}",
     ]
-    if truncated:
+    # If the client streamed a much larger file and sampled, tell the model so
+    # it narrates at the right scale ("across 1.2M rows …") rather than just
+    # the sample size.
+    effective_row_count = total_rows_hint if total_rows_hint else len(body)
+    user_msg_parts.append(f"Total row count in original file: {effective_row_count:,}")
+    if total_rows_hint and total_rows_hint > len(body):
+        user_msg_parts.append(
+            f"You are seeing a representative sample of {len(body)} rows "
+            f"from the full {total_rows_hint:,}-row dataset. "
+            "Write the narrative about the full dataset, but only cite values "
+            "you can see in the sample or in the column stats."
+        )
+    elif truncated:
         user_msg_parts.append("(Body truncated for analysis — originals were longer.)")
+    if file_size_bytes:
+        user_msg_parts.append(f"Source file size: {_fmt_bytes(file_size_bytes)}")
     if context:
         user_msg_parts.append(f"Context: {context}")
     user_msg_parts.append("")
@@ -278,11 +296,22 @@ async def summarize(text: str, context: str) -> dict[str, Any]:
 
     return {
         "summary": summary,
-        "row_count": len(body),
+        # If the client told us the real size, use that so the UI shows the
+        # full dataset stats (not just what made it through the sample).
+        "row_count": total_rows_hint if total_rows_hint else len(body),
+        "sampled_row_count": len(body),
         "column_count": width,
         "delimiter": "tab" if delim == "\t" else delim,
         "highlights": highlights,
         "outliers": outliers,
         "columns": columns,
-        "truncated": truncated,
+        "truncated": truncated or (total_rows_hint and total_rows_hint > len(body)),
     }
+
+
+def _fmt_bytes(n: int) -> str:
+    if n < 1024:
+        return f"{n} B"
+    if n < 1024 * 1024:
+        return f"{n / 1024:.1f} KB"
+    return f"{n / (1024 * 1024):.2f} MB"

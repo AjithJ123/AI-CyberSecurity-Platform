@@ -128,8 +128,13 @@ class ImageAnalyzeResponse(BaseModel):
 class DataSummaryRequest(BaseModel):
     """Input for POST /api/v1/data/summarize."""
 
-    data: str = Field(..., min_length=3, max_length=60_000)
+    data: str = Field(..., min_length=3, max_length=200_000)
     context: str = Field(default="", max_length=500)
+    # When the client has streamed a very large file and is submitting a
+    # sampled subset, it can tell us the real total row count so the response
+    # reflects the actual dataset size rather than just the sample.
+    total_rows_hint: int | None = None
+    file_size_bytes: int | None = None
 
 
 class DataOutlier(BaseModel):
@@ -157,6 +162,7 @@ class DataSummaryResponse(BaseModel):
 
     summary: str
     row_count: int
+    sampled_row_count: int = 0
     column_count: int
     delimiter: str
     highlights: list[str] = Field(default_factory=list)

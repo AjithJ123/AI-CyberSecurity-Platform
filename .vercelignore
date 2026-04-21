@@ -1,0 +1,30 @@
+# Secrets
+.env
+backend/.env
+*.env.local
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Tests don't need to ship with the function
+backend/tests/
+
+# Dev-only helpers
+backend/requirements.txt
+.claude/
+PhishGuard_AI_Documentation.docx
+
+# Node / editor / OS
+node_modules/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

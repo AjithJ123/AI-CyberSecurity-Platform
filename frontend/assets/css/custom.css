@@ -1624,6 +1624,42 @@ body {
   gap: 0.5rem;
   margin-bottom: 0.25rem;
 }
+
+.pg-file-status {
+  margin-top: 0.25rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--pg-bg-panel);
+  border: 1px solid var(--pg-border-strong);
+  border-radius: var(--pg-radius-md);
+}
+.pg-file-status-head {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+.pg-file-status-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--pg-safe);
+}
+.pg-file-status-name {
+  font-family: var(--pg-font-mono);
+  color: var(--pg-text);
+}
+.pg-file-status-size {
+  font-family: var(--pg-font-mono);
+  font-size: 0.75rem;
+  color: var(--pg-text-dim);
+}
+.pg-file-status-msg {
+  margin: 0.35rem 0 0 0;
+  font-size: 0.78rem;
+  color: var(--pg-text-muted);
+}
+
 .pg-data-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
