@@ -72,6 +72,26 @@ async def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
+@app.get("/api/v1/debug/env", tags=["meta"])
+async def debug_env() -> dict[str, object]:
+    """Report which API keys the running function has access to.
+
+    Returns only presence + length — never the values themselves. Handy for
+    confirming that a fresh Vercel deployment picked up the Environment
+    Variables you set in the dashboard.
+    """
+    def _mask(v: str) -> dict[str, object]:
+        return {"present": bool(v), "length": len(v)}
+
+    return {
+        "groq": _mask(settings.groq_api_key),
+        "google_safe_browsing": _mask(settings.google_safe_browsing_api_key),
+        "virustotal": _mask(settings.virustotal_api_key),
+        "phishtank": _mask(settings.phishtank_api_key),
+        "environment": settings.environment,
+    }
+
+
 app.include_router(url_check.router, prefix="/api/v1")
 app.include_router(email_check.router, prefix="/api/v1")
 app.include_router(email_address_check.router, prefix="/api/v1")
