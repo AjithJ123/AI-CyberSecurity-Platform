@@ -32,8 +32,8 @@ pip install -r requirements.txt
 cp .env.example .env                                # fill in API keys
 uvicorn app.main:app --reload --port 8000
 
-# Frontend
-cd frontend
+# Frontend (static files served from the repo root)
+cd ..
 npx serve . -l 5173
 ```
 
@@ -57,18 +57,21 @@ AI-CyberSecurity/
 │   ├── tests/unit/
 │   ├── requirements.txt
 │   └── .env.example
-├── frontend/
-│   ├── index.html                    # home page (Three.js hero + service grid)
-│   ├── scanner.html                  # URL / email threat scanner
-│   ├── writing.html                  # writing rewriter
-│   ├── code.html                     # code review
-│   ├── image.html                    # image analysis
-│   ├── data.html                     # data summary
-│   ├── translate.html                # translator
-│   ├── about.html / privacy.html / developers.html
-│   └── assets/
-│       ├── css/custom.css            # design tokens + components
-│       └── js/                       # one module per page
+├── index.html                        # home page (Three.js hero + service grid)
+├── scanner.html                      # URL / email threat scanner
+├── writing.html                      # writing rewriter
+├── code.html                         # code review
+├── image.html                        # image analysis
+├── data.html                         # data summary
+├── translate.html                    # translator
+├── about.html / privacy.html / developers.html
+├── assets/
+│   ├── css/custom.css                # design tokens + components
+│   └── js/                           # one module per page
+├── api/
+│   ├── index.py                      # Vercel serverless entry → imports backend
+│   └── requirements.txt
+├── vercel.json                       # rewrites + function config
 └── README.md
 ```
 

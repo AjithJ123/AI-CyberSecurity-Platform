@@ -3,7 +3,12 @@
 backend/.env
 *.env.local
 
-# Python
+# Backend source is still bundled *with the function* via vercel.json →
+# includeFiles. These ignores keep it out of the static output.
+backend/tests/
+backend/requirements.txt
+
+# Python bytecode / venv
 __pycache__/
 *.pyc
 *.pyo
@@ -14,13 +19,12 @@ venv/
 .ruff_cache/
 *.egg-info/
 
-# Tests don't need to ship with the function
-backend/tests/
-
-# Dev-only helpers
-backend/requirements.txt
+# Dev-only docs and settings
 .claude/
 PhishGuard_AI_Documentation.docx
+FRONTEND_CLAUDE.md
+CLAUDE.md
+DEPLOY.md
 
 # Node / editor / OS
 node_modules/

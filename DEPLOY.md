@@ -1,8 +1,10 @@
 # Deploying Helix to Vercel
 
-Helix ships as a Vercel monorepo: the static frontend (`frontend/`) is served
-from the project root, and the FastAPI backend runs as a single Python
-serverless function at `api/index.py`.
+The HTML / JS / CSS live at the repo **root** so Vercel serves them
+automatically — no build step, no `outputDirectory`, no framework preset.
+The FastAPI backend runs as a single Python serverless function at
+`api/index.py` and reuses the server code under `backend/` (bundled with the
+function via `vercel.json → includeFiles`).
 
 ## One-time setup
 
@@ -36,18 +38,16 @@ everything in `frontend/` as static assets.
 | `https://your-app.vercel.app/assets/js/*.js` | `frontend/assets/js/*.js` |
 | `https://your-app.vercel.app/api/v1/check/url` | rewritten to `api/index.py` → FastAPI router |
 
-## Local development unchanged
-
-`vercel.json` only applies to the Vercel build. Locally you still run:
+## Local development
 
 ```bash
-# Backend
+# Backend (FastAPI on :8000)
 cd backend
 source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 uvicorn app.main:app --reload --port 8000
 
-# Frontend
-cd frontend
+# Frontend (static files served from the repo root on :5173)
+cd ..
 npx serve . -l 5173
 ```
 

@@ -59,7 +59,14 @@
       "Bash(curl -s -X POST http://127.0.0.1:8000/api/v1/data/summarize -H \"Content-Type: application/json\" --data-binary @C:/temp/ds_payload.json)",
       "Bash(curl -s -X POST http://127.0.0.1:8000/api/v1/translate -H \"Content-Type: application/json\" --data-binary @C:/temp/tr_payload.json)",
       "Bash(gh auth *)",
-      "Bash(curl -s -X POST http://127.0.0.1:8000/api/v1/data/summarize -H \"Content-Type: application/json\" --data-binary @C:/temp/ds_big.json)"
+      "Bash(curl -s -X POST http://127.0.0.1:8000/api/v1/data/summarize -H \"Content-Type: application/json\" --data-binary @C:/temp/ds_big.json)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} · %{time_total}s · %{size_download} bytes\\\\n\" https://ai-cyber-security-platform.vercel.app/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} · %{time_total}s\\\\n\" https://ai-cyber-security-platform.vercel.app/scanner.html)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} · %{time_total}s\\\\n\" https://ai-cyber-security-platform.vercel.app/writing.html)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} · %{time_total}s\\\\n\" https://ai-cyber-security-platform.vercel.app/code.html)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} · %{time_total}s\\\\n\" https://ai-cyber-security-platform.vercel.app/image.html)",
+      "Bash(curl -s https://ai-cyber-security-platform.vercel.app/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" https://ai-cyber-security-platform.vercel.app/api/v1/check/url -X POST -H \"Content-Type: application/json\" -d \"{\\\\\"url\\\\\":\\\\\"https://www.google.com/\\\\\"}\")"
     ]
   }
 }
