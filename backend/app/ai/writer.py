@@ -6,8 +6,7 @@ Failure mode: raises AIAnalysisError if the key is missing or the call fails.
 Privacy: we don't log the user's text — only the resulting word counts and
 duration. The text is sent to Groq for processing.
 """
-import ssl
-import certifi
+
 import json
 import re
 
@@ -18,7 +17,6 @@ from app.exceptions import AIAnalysisError
 
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 GROQ_MODEL = "llama-3.1-8b-instant"
-
 
 TONE_GUIDES: dict[str, str] = {
     "natural": (
@@ -101,7 +99,7 @@ async def rewrite(text: str, tone: str) -> dict[str, object]:
     }
 
     try:
-        async with httpx.AsyncClient(verify=False) as client:
+        async with httpx.AsyncClient(timeout=30.0) as client:
             resp = await client.post(GROQ_URL, json=payload, headers=headers)
             resp.raise_for_status()
             data = resp.json()

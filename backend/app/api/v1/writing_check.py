@@ -1,57 +1,53 @@
-"""Writing rewrite endpoint."""
+"""POST /api/v1/writing/rewrite — rewrite text in the requested tone."""
 
-from __future__ import annotations
+import logging
+import time
 
-import certifi
-import httpx
-from groq import AsyncGroq
-from fastapi import APIRouter, Request
-from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException, Request
 
-from app.config import settings
-from app.exceptions import CheckerError
+from app.ai import writer
+from app.exceptions import AIAnalysisError
+from app.models.schemas import WritingRewriteRequest, WritingRewriteResponse
 from app.rate_limit import limiter
 
 router = APIRouter(tags=["writing"])
+logger = logging.getLogger(__name__)
 
 
-class RewriteRequest(BaseModel):
-    text: str
-    tone: str = "natural"
-
-
-class RewriteResponse(BaseModel):
-    rewritten: str
-
-
-def _get_groq_client() -> AsyncGroq:
-    """Return Groq client with proper SSL verification."""
-    http_client = httpx.AsyncClient(verify=certifi.where())
-    return AsyncGroq(api_key=settings.groq_api_key, http_client=http_client)
-
-
-@router.post("/writing/rewrite", response_model=RewriteResponse)
-@limiter.limit("20/minute")
-async def rewrite_text(request: Request, body: RewriteRequest) -> RewriteResponse:
-    """Rewrite text in the requested tone using Groq AI."""
+@router.post("/writing/rewrite", response_model=WritingRewriteResponse)
+@limiter.limit("10/minute")
+async def rewrite_text(request: Request, req: WritingRewriteRequest) -> WritingRewriteResponse:
+    """Send text to the AI rewriter and return the cleaned-up version."""
+    started = time.perf_counter()
     try:
-        client = _get_groq_client()
-
-        prompt = (
-            f"Rewrite the following text in a {body.tone} tone. "
-            f"Return only the rewritten text, no explanations.\n\n"
-            f"Text: {body.text}"
+        result = await writer.rewrite(req.text, req.tone)
+    except AIAnalysisError as exc:
+        logger.warning("writing_rewrite_failed", extra={"reason": str(exc)})
+        raise HTTPException(
+            status_code=503,
+            detail="The writing assistant is unavailable right now. Please try again.",
         )
 
-        response = await client.chat.completions.create(
-            model="llama3-8b-8192",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=1024,
-            temperature=0.7,
-        )
+    rewritten: str = result["rewritten"]  # type: ignore[assignment]
+    changes: list[str] = result["changes"]  # type: ignore[assignment]
+    duration_ms = int((time.perf_counter() - started) * 1000)
 
-        rewritten = response.choices[0].message.content.strip()
-        return RewriteResponse(rewritten=rewritten)
-
-    except Exception as exc:
-        raise CheckerError("Writing assistant unavailable") from exc
+    response = WritingRewriteResponse(
+        original=req.text,
+        rewritten=rewritten,
+        tone=req.tone,
+        changes=changes,
+        original_word_count=writer.word_count(req.text),
+        rewritten_word_count=writer.word_count(rewritten),
+        duration_ms=duration_ms,
+    )
+    logger.info(
+        "writing_rewrite_completed",
+        extra={
+            "tone": req.tone,
+            "in_words": response.original_word_count,
+            "out_words": response.rewritten_word_count,
+            "duration_ms": duration_ms,
+        },
+    )
+    return response
