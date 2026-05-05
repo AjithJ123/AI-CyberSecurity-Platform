@@ -83,7 +83,7 @@ Development) or the key won't show up on preview URLs.
 Open the deployment's **Logs** tab in Vercel. The traceback is printed there.
 Most common cause: missing env var.
 
-### Frontend calls still go to `http://127.0.0.1:8000`
+### Frontend calls still go to `https://harmonious-energy-production-dca4.up.railway.app`
 
 That means you're visiting a local file (`file://`). The auto-detector in
 `api.js` requires the page to be served from `http(s)://`. Use `npx serve` or
