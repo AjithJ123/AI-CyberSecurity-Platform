@@ -31,13 +31,17 @@ app = FastAPI(
     description="A growing suite of AI tools. First module: phishing-threat scanner for URLs and emails.",
 )
 
-# Rate limiting — per-endpoint decorators live on the individual routers.
-# We do NOT use SlowAPIMiddleware because it interferes with CORS preflight.
+# Rate limiting
 app.state.limiter = limiter
 
+# CORS — allow Railway frontend + local dev
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origin_list,
+    allow_origins=[
+        "https://ai-cybersecurity-platform-production-097f.up.railway.app",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
     allow_credentials=False,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
@@ -46,7 +50,6 @@ app.add_middleware(
 
 @app.exception_handler(RateLimitExceeded)
 async def rate_limit_handler(_: Request, exc: RateLimitExceeded) -> JSONResponse:
-    """Plain-English 429 — no stack, no leaked internals."""
     return JSONResponse(
         status_code=429,
         content={"detail": "Too many checks. Please slow down and try again in a minute."},
@@ -55,7 +58,6 @@ async def rate_limit_handler(_: Request, exc: RateLimitExceeded) -> JSONResponse
 
 @app.exception_handler(CheckerError)
 async def checker_error_handler(_: Request, exc: CheckerError) -> JSONResponse:
-    """Convert internal checker errors into safe 503 responses."""
     return JSONResponse(
         status_code=503,
         content={"detail": "A check service is temporarily unavailable. Please try again."},
@@ -74,12 +76,6 @@ async def health() -> dict[str, str]:
 
 @app.get("/api/v1/debug/env", tags=["meta"])
 async def debug_env() -> dict[str, object]:
-    """Report which API keys the running function has access to.
-
-    Returns only presence + length — never the values themselves. Handy for
-    confirming that a fresh Vercel deployment picked up the Environment
-    Variables you set in the dashboard.
-    """
     def _mask(v: str) -> dict[str, object]:
         return {"present": bool(v), "length": len(v)}
 

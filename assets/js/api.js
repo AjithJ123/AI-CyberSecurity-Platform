@@ -11,9 +11,9 @@ function _detectApiBase() {
     hostname === "0.0.0.0" ||
     hostname.endsWith(".local");
   if (isLocal && window.location.port !== "8000") {
-    return "https://harmonious-energy-production-dca4.up.railway.app";
+    return "https://harmonious-energy-production-dca4.up.railway.app/api/v1";
   }
-  return "https://harmonious-energy-production-dca4.up.railway.app";
+  return "https://harmonious-energy-production-dca4.up.railway.app/api/v1";
 }
 
 export const API_BASE = window.__HELIX_API_BASE__ ?? _detectApiBase();
