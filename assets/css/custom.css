@@ -146,6 +146,60 @@ body {
   gap: 0.25rem;
   font-size: 0.875rem;
 }
+.pg-nav-toggle {
+  display: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--pg-border-strong);
+  border-radius: var(--pg-radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--pg-text);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.pg-nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--pg-primary);
+}
+.pg-nav-toggle-lines {
+  position: relative;
+  width: 1.15rem;
+  height: 0.85rem;
+}
+.pg-nav-toggle-lines,
+.pg-nav-toggle-lines::before,
+.pg-nav-toggle-lines::after {
+  display: block;
+}
+.pg-nav-toggle-lines::before,
+.pg-nav-toggle-lines::after,
+.pg-nav-toggle-lines span {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 0.18s ease, opacity 0.18s ease, top 0.18s ease;
+}
+.pg-nav-toggle-lines::before { top: 0; }
+.pg-nav-toggle-lines span { top: 50%; transform: translateY(-50%); }
+.pg-nav-toggle-lines::after { top: calc(100% - 2px); }
+.pg-header.is-nav-open .pg-nav-toggle-lines::before {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+.pg-header.is-nav-open .pg-nav-toggle-lines span {
+  opacity: 0;
+}
+.pg-header.is-nav-open .pg-nav-toggle-lines::after {
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
 .pg-nav-link {
   padding: 0.5rem 0.875rem;
   color: var(--pg-text-muted);
@@ -157,19 +211,60 @@ body {
   color: var(--pg-text);
   background: rgba(255, 255, 255, 0.03);
 }
-.pg-nav-active {
+.pg-nav-active,
+.pg-nav-link[aria-current="page"] {
   color: var(--pg-text);
   background: var(--pg-primary-soft);
   box-shadow: inset 0 0 0 1px var(--pg-border-strong);
 }
 
-/* Tighten the header on narrow screens so "PhishGuard AI" + nav both fit. */
-@media (max-width: 640px) {
-  .pg-header .flex { flex-wrap: nowrap; gap: 0.5rem; }
-  .pg-brand { font-size: 0.95rem; gap: 0.4rem; }
-  .pg-brand-icon { width: 1.25rem; height: 1.25rem; }
-  .pg-nav { gap: 0; flex-shrink: 1; min-width: 0; overflow-x: auto; }
-  .pg-nav-link { padding: 0.4rem 0.55rem; font-size: 0.8rem; }
+@media (max-width: 900px) {
+  .pg-header .pg-container {
+    position: relative;
+    gap: 0.75rem;
+  }
+  .pg-brand {
+    min-width: 0;
+    font-size: 0.95rem;
+    gap: 0.45rem;
+  }
+  .pg-brand-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  .pg-nav-toggle {
+    display: inline-flex;
+  }
+  .pg-nav {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    right: 1rem;
+    left: 1rem;
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.45rem;
+    border: 1px solid var(--pg-border-strong);
+    border-radius: var(--pg-radius-md);
+    background: rgba(5, 5, 5, 0.96);
+    box-shadow: var(--pg-shadow-lg);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.35rem);
+    visibility: hidden;
+    transition: opacity 0.16s ease, transform 0.16s ease;
+  }
+  .pg-header.is-nav-open .pg-nav {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+  }
+  .pg-nav-link {
+    width: 100%;
+    padding: 0.75rem 0.85rem;
+    border-radius: var(--pg-radius-sm);
+    font-size: 0.95rem;
+  }
 }
 
 /* -------- Hero -------- */

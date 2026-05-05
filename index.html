@@ -33,8 +33,11 @@
           </svg>
           <span><span class="pg-brand-name">Helix</span><span class="pg-brand-accent">AI</span></span>
         </a>
-        <nav aria-label="Primary" class="pg-nav">
-          <a href="./index.html" class="pg-nav-link pg-nav-active">Home</a>
+        <button class="pg-nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false">
+          <span class="pg-nav-toggle-lines" aria-hidden="true"><span></span></span>
+        </button>
+        <nav id="primary-nav" aria-label="Primary" class="pg-nav">
+          <a href="./index.html" class="pg-nav-link pg-nav-active" aria-current="page">Home</a>
           <a href="./about.html" class="pg-nav-link">About</a>
           <a href="./privacy.html" class="pg-nav-link">Privacy</a>
         </nav>
@@ -323,6 +326,7 @@
       </div>
     </footer>
 
+    <script type="module" src="assets/js/nav.js"></script>
     <script type="module" src="assets/js/home-fx.js?v=2"></script>
     <script type="module" src="assets/js/three-hero.js?v=blob1"></script>
   </body>

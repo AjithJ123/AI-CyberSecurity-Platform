@@ -29,7 +29,10 @@
           </svg>
           <span><span class="pg-brand-name">Helix</span><span class="pg-brand-accent">AI</span></span>
         </a>
-        <nav aria-label="Primary" class="pg-nav">
+        <button class="pg-nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-nav" aria-expanded="false">
+          <span class="pg-nav-toggle-lines" aria-hidden="true"><span></span></span>
+        </button>
+        <nav id="primary-nav" aria-label="Primary" class="pg-nav">
           <a href="./index.html" class="pg-nav-link">Home</a>
           <a href="./scanner.html" class="pg-nav-link">Scanner</a>
           <a href="./writing.html" class="pg-nav-link">Writer</a>
@@ -38,7 +41,7 @@
           <a href="./data.html" class="pg-nav-link">Data</a>
           <a href="./translate.html" class="pg-nav-link">Translate</a>
           <a href="./about.html" class="pg-nav-link">About</a>
-          <a href="./privacy.html" class="pg-nav-link pg-nav-active">Privacy</a>
+          <a href="./privacy.html" class="pg-nav-link pg-nav-active" aria-current="page">Privacy</a>
           <a href="./developers.html" class="pg-nav-link">API</a>
         </nav>
       </div>
@@ -67,5 +70,6 @@
         policies if this matters to you.
       </p>
     </main>
+    <script type="module" src="assets/js/nav.js"></script>
   </body>
 </html>
