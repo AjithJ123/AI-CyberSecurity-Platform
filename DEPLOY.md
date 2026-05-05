@@ -53,7 +53,7 @@ npx serve . -l 5173
 
 The frontend [API client](frontend/assets/js/api.js) auto-detects:
 
-* Local (`localhost` / `127.0.0.1` on port ≠ 8000) → `http://127.0.0.1:8000/api/v1`
+* Local (`localhost` / `127.0.0.1` on port ≠ 8000) → `https://harmonious-energy-production-dca4.up.railway.app`
 * Production (any other host) → same-origin `/api/v1`
 
 ## Known limitations on Vercel
